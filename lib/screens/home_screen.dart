@@ -13,7 +13,8 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final TextEditingController titleController = TextEditingController();
-
+  final TextEditingController descriptionController = TextEditingController();
+  final TextEditingController tagsController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,7 +36,11 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             ),
             const SizedBox(height: 20),
-            CustomTextField(maxLines: 3, maxLength: 100, hintText: 'Enter video Title', controller: titleController)
+            CustomTextField(maxLines: 3, maxLength: 100, hintText: 'Enter video Title', controller: titleController),
+            SizedBox(height: 40),
+            CustomTextField(
+                maxLines: 5, maxLength: 5000, hintText: 'Enter video description', controller: titleController),
+            CustomTextField(maxLines: 3, maxLength: 100, hintText: 'Enter video Title', controller: titleController),
           ],
         ),
       ),
@@ -45,8 +50,8 @@ class _HomeScreenState extends State<HomeScreen> {
   ElevatedButton _mainButton(Function()? onPress, String text) {
     return ElevatedButton(
       onPressed: onPress,
-      child: Text(text),
       style: _buttonStyle(),
+      child: Text(text),
     );
   }
 
