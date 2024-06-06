@@ -1,6 +1,8 @@
 // ignore_for_file: prefer_const_constructors
 import 'dart:convert';
 
+import 'package:flutter/widgets.dart';
+import 'package:flutterporject/screens/user_screen.dart';
 import 'package:flutterporject/utils/models/models.dart';
 import 'package:flutterporject/widgets/dropdown_menu.dart';
 import 'package:http/http.dart' as http;
@@ -46,14 +48,30 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppTheme.dark,
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 60),
-        child: Row(
-          children: [
-            // CustomTextField(maxLines: 1, maxLength: 100, hintText: 'Wpisz nr 1-100', controller: titleController),
-            DropdownMenuExample(elements: users)
-            //  _actionButton(() => null, Icons.check)
-          ],
+      appBar: AppBar(
+        title: Text('Wybierz użytkownika'),
+        centerTitle: true,
+      ),
+      body: Center(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 60),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              users.isNotEmpty
+                  ? DropdownMenuExample(
+                      elements: users,
+                      onSelect: (selectedUser) => {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => UserScreen(selectedUserId: selectedUser.id ?? 0)),
+                        )
+                      },
+                    )
+                  : SizedBox(),
+              _actionButton(() => null, Icons.check),
+            ],
+          ),
         ),
       ),
     );
