@@ -1,22 +1,26 @@
 class User extends DropDownModel {
-  int? id;
-  String? nazwa;
-  String? username;
-  String? email;
+  int id = 0;
+  String nazwa = '';
+  String username = '';
+  String email = '';
 
   @override
   int? get dajId => id;
   @override
   String? get dajNazwa => nazwa;
 
-  User({this.id, this.nazwa, this.username, this.email});
+  User({
+    required this.id,
+    required this.nazwa,
+    required this.username,
+    required this.email,
+  });
 
-  User.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    nazwa = json['name'];
-    username = json['username'];
-    email = json['email'];
-  }
+  User.fromJson(Map<String, dynamic> json)
+      : id = json['id'] ?? 0,
+        nazwa = json['name'] ?? '',
+        username = json['username'] ?? '',
+        email = json['email'] ?? '';
 }
 
 abstract class DropDownModel {

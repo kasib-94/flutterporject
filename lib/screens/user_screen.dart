@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutterporject/utils/models/models.dart';
+import 'package:flutterporject/widgets/loading_Scaffold.dart';
 import 'package:http/http.dart' as http;
 
 class UserScreen extends StatefulWidget {
@@ -14,17 +15,17 @@ class UserScreen extends StatefulWidget {
 }
 
 class _UserScreenState extends State<UserScreen> {
-  late User user;
+  User? user;
 
   @override
   void initState() {
     super.initState();
-    fetchUsers().then((fetchedUsers) {
+    fetchUsers().then((fetchedUser) {
       setState(() {
-        user = fetchedUsers;
+        user = fetchedUser;
       });
     }).catchError((error) {
-      print('Error fetching users: $error');
+      print('Error fetching user: $error');
     });
   }
 
@@ -33,18 +34,36 @@ class _UserScreenState extends State<UserScreen> {
     final response = await http.get(url, headers: {"Content-Type": "application/json"});
 
     if (response.statusCode == 200) {
-      final List<dynamic> body = json.decode(response.body);
-      return body.map((e) => User.fromJson(e)).first;
+      final body = json.decode(response.body);
+      return User.fromJson(body);
     } else {
-      throw Exception('Failed to load users');
+      throw Exception('Błąd!!');
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    return user != null ? buildUserScaffold(context) : buildLoadingScaffold(context);
+  }
+
+  Widget buildUserScaffold(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(user.email ?? ''),
+        title: Row(
+          children: [
+            const Icon(Icons.person),
+            Text('Witaj, ${user!.email}'),
+          ],
+        ),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+      ),
+      body: Center(
+        child: Text('Welcome, ${user!.email}'),
       ),
     );
   }
