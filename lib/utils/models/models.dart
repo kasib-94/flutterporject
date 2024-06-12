@@ -28,25 +28,22 @@ abstract class DropDownModel {
   int? get dajId;
 }
 
-class Post extends DropDownModel {
-  int? albumId;
-  int? id;
-  String? nazwa;
-  String? url;
-  String? thumbnailUrl;
+class Post {
+  int userId = 0;
+  int id = 0;
+  String title = "";
+  String body = "";
 
-  @override
-  int? get dajId => id;
-  @override
-  String? get dajNazwa => nazwa;
+  Post({
+    required this.userId,
+    required this.id,
+    required this.title,
+    required this.body,
+  });
 
-  Post({this.albumId, this.id, this.nazwa, this.url, this.thumbnailUrl});
-
-  Post.fromJson(Map<String, dynamic> json) {
-    albumId = json['albumId'];
-    id = json['id'];
-    nazwa = json['title'];
-    url = json['url'];
-    thumbnailUrl = json['thumbnailUrl'];
-  }
+  Post.fromJson(Map<String, dynamic> json)
+      : userId = json['userId'] ?? 0,
+        id = json['id'] ?? 0,
+        title = json['title'] ?? '',
+        body = json['body'] ?? '';
 }
