@@ -70,3 +70,37 @@ class Comment {
         body = json['body'] ?? '',
         postId = json['postId'] ?? '';
 }
+
+class Album {
+  int userId = 0;
+  int id = 0;
+  String title = "";
+
+  Album({
+    required this.userId,
+    required this.id,
+    required this.title,
+  });
+
+  Album.fromJson(Map<String, dynamic> json)
+      : userId = json['userId'] ?? 0,
+        id = json['id'] ?? 0,
+        title = json['title'] ?? '';
+}
+
+class Photo {
+  int albumId = 0;
+  int id = 2;
+  String title = "";
+  String url = "";
+  String thumbnailUrl = "";
+
+  Photo({required this.albumId, required this.id, required this.title, required this.url, required this.thumbnailUrl});
+
+  Photo.fromJson(Map<String, dynamic> json)
+      : albumId = json['userId'] ?? 0,
+        id = json['id'] ?? 0,
+        title = json['title'] ?? '',
+        url = json['url'] ?? 0,
+        thumbnailUrl = json['thumbnailUrl'] ?? '';
+}
