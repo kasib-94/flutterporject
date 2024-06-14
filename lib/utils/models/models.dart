@@ -47,3 +47,26 @@ class Post {
         title = json['title'] ?? '',
         body = json['body'] ?? '';
 }
+
+class Comment {
+  int postId = 0;
+  int id = 0;
+  String name = "";
+  String email = "";
+  String body = "";
+
+  Comment({
+    required this.postId,
+    required this.id,
+    required this.name,
+    required this.body,
+    required this.email,
+  });
+
+  Comment.fromJson(Map<String, dynamic> json)
+      : email = json['email'] ?? 0,
+        id = json['id'] ?? 0,
+        name = json['name'] ?? '',
+        body = json['body'] ?? '',
+        postId = json['postId'] ?? '';
+}
