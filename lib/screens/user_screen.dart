@@ -80,7 +80,7 @@ class _UserScreenState extends State<UserScreen> {
                             )),
                   );
                 },
-                child: const Text('Go to albums'),
+                child: const Text('Albumy użytkownika'),
               ),
             ),
           ],

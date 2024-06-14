@@ -46,8 +46,8 @@ class _PhotoScreenState extends State<PhotoScreen> {
                 if (snapshot.hasData) {
                   return GridView.builder(
                       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        childAspectRatio: 2,
+                        crossAxisCount: 3,
+                        childAspectRatio: 3,
                       ),
                       itemCount: snapshot.data!.length,
                       itemBuilder: (context, index) {

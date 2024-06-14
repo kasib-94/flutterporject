@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:flutterporject/screens/photos_screen.dart';
 import 'package:flutterporject/utils/models/models.dart';
 import 'package:flutterporject/widgets/loading_Scaffold.dart';
 import 'package:http/http.dart' as http;
@@ -60,7 +61,16 @@ class _AlbumScreenState extends State<AlbumScreen> {
                         return Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: InkWell(
-                              onTap: () {},
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => PhotoScreen(
+                                            user: widget.user,
+                                            albumId: snapshot.data![index].id,
+                                          )),
+                                );
+                              },
                               child: Card(
                                 child: Center(
                                   child: Text(item.title),
